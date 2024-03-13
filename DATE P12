@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html ng-app="dateApp">
+<head>
+  <title>Date Display</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="DateController">
+  <h2>Date Display</h2>
+  <p>{{ currentDate | date: 'fullDate' }}</p>
+  <script>
+    angular.module('dateApp', []).controller('DateController', function($scope) {
+      $scope.currentDate = new Date();
+    });
+  </script>
+</body>
+</html>
