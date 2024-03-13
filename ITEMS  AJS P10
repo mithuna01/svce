@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="itemApp">
+<head>
+  <title>Item Collection</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="ItemController">
+  <h2>Item Collection</h2>
+  <form ng-submit="addItem()">
+    <input type="text" ng-model="newItem" placeholder="Add new item">
+    <button type="submit">Add</button>
+  </form>
+  <ul>
+    <li ng-repeat="item in items">
+      {{ item }}
+      <button ng-click="items.splice($index, 1)">Remove</button>
+    </li>
+  </ul>
+  <p>Total number of items: {{ items.length }}</p>
+  <script>
+    angular.module('itemApp', []).controller('ItemController', function($scope) {
+      $scope.items = ['Item 1', 'Item 2', 'Item 3'];
+      $scope.addItem = () => $scope.newItem && $scope.items.push($scope.newItem) && ($scope.newItem = '');
+    });
+  </script>
+</body>
+</html>
