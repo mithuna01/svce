@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="calculatorApp">
+<head>
+    <title>AngularJS Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+<div ng-controller="CalculatorController">
+    <h2>Calculator</h2>
+    <label for="numberInput">Enter a number:</label>
+    <input type="number" id="numberInput" ng-model="number" placeholder="Enter a number">
+    <button ng-click="calculateFactorial()">Calculate Factorial</button>
+    <button ng-click="calculateSquare()">Calculate Square</button>
+    <p ng-if="factorialResult !== null">Factorial of {{ number }} is: {{ factorialResult }}</p>
+    <p ng-if="squareResult !== null">Square of {{ number }} is: {{ squareResult }}</p>
+</div>
+<script>
+    angular.module('calculatorApp', [])
+        .controller('CalculatorController', function($scope) {
+            $scope.calculateFactorial = function() {
+                var num = $scope.number;
+                if (num < 0) {
+                    $scope.factorialResult = "Factorial is not defined for negative numbers";
+                    return;
+                }
+                var factorial = 1;
+                for (var i = 2; i <= num; i++) {
+                    factorial *= i;
+                }
+                $scope.factorialResult = factorial;
+            };
+$scope.calculateSquare = function() {
+                var num = $scope.number;
+                $scope.squareResult = num * num;
+            };
+        });
+</script>
+</body>
+</html>
