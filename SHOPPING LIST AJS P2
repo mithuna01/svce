@@ -4,34 +4,29 @@
     <title>Shopping List</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
-<body>
-<div ng-controller="ShoppingController">
+<body ng-controller="ShoppingController as shop">
     <h2>Shopping List</h2>
+    <input type="text" ng-model="shop.newItem" placeholder="Enter new item">
+    <button ng-click="shop.addItem()">Add Item</button>
     <ul>
-        <li ng-repeat="item in items track by $index">{{ item }}
-            <button ng-click="removeItem($index)">Remove</button>
-        </li>
+        <li ng-repeat="item in shop.items track by $index">{{ item }} <button ng-click="shop.removeItem($index)">Remove</button></li>
     </ul>
-    <input type="text" ng-model="newItem" placeholder="Add new item">
-    <button ng-click="addItem()">Add Item</button>
-</div>
-<script>
-    angular.module('shoppingApp', [])
-        .controller('ShoppingController', function($scope) {
-            // Default list of items
-            $scope.items = ["Milk", "Bread", "Eggs"];
-            // Function to add a new item to the list
-            $scope.addItem = function() {
-                if ($scope.newItem) {
-                    $scope.items.push($scope.newItem);
-                    $scope.newItem = ''; // Clear input field
-                }
-            };
-           // Function to remove an item from the list
-            $scope.removeItem = function(index) {
-                $scope.items.splice(index, 1);
-            };
-        });
-</script>
+    <script>
+        angular.module('shoppingApp', [])
+            .controller('ShoppingController', function () {
+                var shop = this;
+                shop.items = ['Apples', 'Bananas', 'Oranges'];
+
+                shop.addItem = function () {
+                    if (shop.newItem !== "") {
+                        shop.items.push(shop.newItem);
+                        shop.newItem = "";
+                    }
+                };
+                shop.removeItem = function (index) {
+                    shop.items.splice(index, 1);
+                };
+            });
+    </script>
 </body>
 </html>
